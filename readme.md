@@ -30,7 +30,7 @@ That simple, that good.</p>
  
  | Name            | Contribution                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-|<a href = "https://github.com/yug0231" > Ayush </a> | Login / Signup , authentication |
+|<a href = "https://github.com/Ayushsingh05" > Ayush </a> | Login / Signup , authentication |
 | <a href = "https://github.com/Adil-khan-007" > Ramiz raza </a>| Search Page |
 |<a href = "https://github.com/vaddadiPhani" > Hari </a>| Profile Page |
 | <a href = "https://github.com/Mr-raaz" >Anshu Raj </a> | Landing Page , Cart Page|
