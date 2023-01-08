@@ -1,7 +1,11 @@
 export const backendurl = "https://frank-body-backend-git-produtnew2-mr-raaz.vercel.app/";
-export const localtest = "localhost:5000/auth/login"
-export const loginroute = backendurl + "/auth/login";
-
+export const localtest = "http://localhost:5000/"
+export const currentRoute = localtest;
+export const loginroute = currentRoute + "auth/login";
+export const getuserdatawithID = currentRoute + "profile/";
+export const getmobilenadgender = currentRoute + "profile/mobilegender/";
+export const postmobilegenderemail = currentRoute + "profile/"
+export const getallproduct = currentRoute + "products/"
 export const profileSideList = [
     {
        listImg: "https://www.netmeds.com/msassets/images/icons/profile-icon.svg",

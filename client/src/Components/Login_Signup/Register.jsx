@@ -19,15 +19,17 @@ function Register() {
     const navigate = useNavigate();
 
 
-    function handleFormSubmit(e){
+  async  function handleFormSubmit(e){
 
         e.preventDefault();
 
-        axios.post('https://frank-body-backend.vercel.app/user/register' , {
+       axios.post('http://localhost:5000/user/register' , {
             name:fname.current.value +" "+lname.current.value,
             email:email.current.value,
             password:pass.current.value
-        }).then((res)=>{
+        })
+        .then((res)=>{
+            console.log(res);
           toast.success(`${res.data}`, {
             position: "top-center",
             autoClose: 1500,
@@ -42,6 +44,7 @@ function Register() {
             setTimeout(()=>{
                 navigate('/login');
             },1500)
+            console.log(res);
 
         }).catch((err)=>{
           toast.error(`${err.response.data}`, {

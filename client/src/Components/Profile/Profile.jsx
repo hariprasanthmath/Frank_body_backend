@@ -7,7 +7,7 @@ import { Box } from '@chakra-ui/react'
 import { Text, Button, useMediaQuery, HStack, VStack, Grid, GridItem, Image, Heading, FormControl, FormHelperText,
     FormLabel, Input
 } from '@chakra-ui/react';
-import {profileSideList} from "../../constant"
+import {getmobilenadgender, getuserdatawithID, postmobilegenderemail, profileSideList} from "../../constant"
 import Cookies from 'universal-cookie';
 import {SetLogin} from '../../ReduxStore/Actions/mainAction';
 import { useDispatch } from 'react-redux';
@@ -32,6 +32,7 @@ import { useEffect } from 'react';
 // import axios from 'axios';
 import { useSelector } from 'react-redux';
 // import { store } from '../../ReduxStore/store';
+import { loginroute } from '../../constant';
 function Profile(props) {
   
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -80,31 +81,46 @@ function Profile(props) {
 //     gender : ""
 // };
 const getData = async ()=>{
-    let url = "https://frank-body-backend-git-produtnew2-mr-raaz.vercel.app/profile/"+curruserID;
+    let url = getuserdatawithID+curruserID;
     console.log(url);
     let fetcheddata = await fetch(url);
     let result = await fetcheddata.json();
-    let fullname = result.message[0].name.split(" ");
-    if(address){
-      if(result.message[0]?.address.length !== 0){
-        var address = result.message[0]?.address[0];
-    if(address?.firstname.length === 0 || address?.lastname.length === 0){
-        address.firstname = fullname[0];
-        address.lastname = fullname[1];
-        setCurrentuser(address);
+    let namestring = result.message[0].name;
+    let containsspace = false;
+    for(var index=0; index<namestring.length;index++){
+          if(namestring.charCodeAt(index) === 32){
+              containsspace = true;
+          }
     }
+    if(containsspace){
+      let fullname = result.message[0].name.split(" ");
+
+
+      if(address){
+        if(result.message[0]?.address.length !== 0){
+          var address = result.message[0]?.address[0];
+      if(address?.firstname.length === 0 || address?.lastname.length === 0){
+          address.firstname = fullname[0];
+          address.lastname = fullname[1];
+          setCurrentuser(address);
+      }}else{
+        setCurrentuser({
+            ...currentUser,
+            firstname: fullname[0] ,
+            lastname: fullname[1] ,
+            email: result.message[0].email
+        })
+    }
+    }else{
+      address.firstname = namestring;
+      address.lastname = "";
+    }
+    
 
     }
    
 
-    }else{
-        setCurrentuser({
-            ...currentUser,
-            firstname: fullname[0],
-            lastname: fullname[1],
-            email: result.message[0].email
-        })
-    }
+    
     
     
     
@@ -113,7 +129,8 @@ const getData = async ()=>{
     const [editUser, seteditUser] = useState(currentUser); 
    
     const getmobileandgender = async ()=>{
-        let mobgen = await fetch("https://frank-body-backend-git-produtnew2-mr-raaz.vercel.app/profile/mobilegender/"+curruserID);
+       const url = `${getmobilenadgender}${curruserID}`
+        let mobgen = await fetch(url);
         let result = await mobgen.json();
         setGender(result[0].address[0]?.gender);
         setMobile(result[0].address[0]?.mobile);
@@ -199,7 +216,8 @@ const getData = async ()=>{
           mobile : mobile, 
           gender : gender
       }
-         let resp = await fetch("https://frank-body-backend-git-produtnew2-mr-raaz.vercel.app/profile", {
+         const url = `${postmobilegenderemail}`;
+         let resp = await fetch(url, {
             method : "POST",
             headers :{
                 "Content-Type" : "application/json"

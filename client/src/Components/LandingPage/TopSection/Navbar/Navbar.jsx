@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faUser, faCartShopping, faX } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getallproduct } from '../../../../constant';
 
 function Navbar() {
 
@@ -17,7 +18,7 @@ function Navbar() {
     const [data, setdata] = useState([]);
 
     const getData = async () => {
-        let res = await fetch(`https://frank-body-backend.vercel.app/products`)
+        let res = await fetch(`${getallproduct}`)
         let arr = await res.json();
         setdata(arr.data);
     }
