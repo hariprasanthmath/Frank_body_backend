@@ -5,6 +5,7 @@ import Popup from './Popup';
 import RightCommentDiv from './RightCommentDiv';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { getcommentget } from '../../constant';
 function ProductsRating(props) {
 
     let [comments , setComments] = useState([]);
@@ -23,7 +24,7 @@ function ProductsRating(props) {
     }
 
     async function getComments(){
-        let temp = await axios.get(`https://frank-body-backend.vercel.app/comment/get/${id}`);
+        let temp = await axios.get(`${getcommentget}${id}`);
         setComments(temp.data);
         counting();
     }

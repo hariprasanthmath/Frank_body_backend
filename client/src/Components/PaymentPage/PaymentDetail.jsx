@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../ReduxStore/Actions/mainAction';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { userorderplaced } from '../../constant';
 function PaymentDetail() {
 
     const [curr, setcurr] = useState('3');
@@ -31,7 +32,7 @@ function PaymentDetail() {
 
         let token = cookies.get('jwt');
         
-        axios.post('https://frank-body-backend.vercel.app/user/orderPlaced' , {
+        axios.post(userorderplaced , {
                 token:token
         })
 

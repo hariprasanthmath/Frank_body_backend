@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import {toast as tt} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { loginroute } from '../../constant';
+import { authfacebook, authgoogle, authlogin, loginroute } from '../../constant';
 // import {SetLogin} from '../../ReduxStore/Actions/mainAction';
 import Cookies from 'universal-cookie';
 import { setUserID } from '../../ReduxStore/Actions/mainAction';
@@ -67,7 +67,7 @@ function Login() {
             
            
 
-           fetch('http://localhost:5000/auth/login' ,{
+           fetch(authlogin ,{
 
                 method: "POST",
                 headers :{
@@ -115,11 +115,11 @@ function Login() {
 
 
         const google = () => {
-            window.open("http://localhost:5000/auth/google", "_self");
+            window.open(authgoogle, "_self");
           };
         
           const facebook = () => {
-            window.open("http://localhost:5000/auth/facebook", "_self");
+            window.open(authfacebook, "_self");
           };
 
 

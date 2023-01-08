@@ -1,3 +1,6 @@
+import { getallproduct } from "../../constant";
+
+
 export default function AddProducts(dispatch , updatefilte){
 
     async function getData(){
@@ -6,7 +9,7 @@ export default function AddProducts(dispatch , updatefilte){
         // const res = await fetch('https://odd-pleat-cod.cyclic.app/products');
         
         // new api
-        const res = await fetch('https://frank-body-backend.vercel.app/products');
+        const res = await fetch(`${getallproduct}`);
         const data = await res.json();
 
         const products = data.data;

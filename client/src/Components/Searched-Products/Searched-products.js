@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import Navbar from '../LandingPage/TopSection/Navbar/Navbar';
 import { Footer } from '../Footer/footer';
 import style from "./SearchedProducts.css"
+import { getallproduct } from '../../constant';
 
 function SearchedProducts() {
     let [searchParam, setParam] = useSearchParams();
@@ -11,7 +12,7 @@ function SearchedProducts() {
 
     const getData = async () => {
 
-        let res = await fetch(`https://frank-body-backend.vercel.app/products`)
+        let res = await fetch(getallproduct)
         let arr = await res.json();
         arr = arr.data;
         let products = arr.filter((elem) => {

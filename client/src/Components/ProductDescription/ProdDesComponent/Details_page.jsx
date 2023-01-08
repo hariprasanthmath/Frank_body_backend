@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+import { deletefromcart, productaddtocart } from "../../../constant";
 function Details_page({data}) {
 
 
@@ -47,7 +48,7 @@ function Details_page({data}) {
       // alert(_id);
       let token = cookies.get('jwt');
       
-      axios.post('https://frank-body-backend.vercel.app/products/addtocart' , {
+      axios.post(productaddtocart , {
           headers: {
               Authentication:token
           },
@@ -92,7 +93,7 @@ function Details_page({data}) {
         currCartState(false);
         let token = cookies.get('jwt');
             
-        axios.post('https://frank-body-backend.vercel.app/products/deletefromcart' , {
+        axios.post(deletefromcart , {
             headers: {
                 Authentication:token
             },

@@ -9,6 +9,7 @@ const profileRoute = require("./routes/profile.route")
 const cookieSession = require("cookie-session");
 const passportSetup = require("./passport");
 const passport = require("passport");
+const productmodel = require("./models/product.model")
 const commentRoute = require('./routes/comments.route');
 const app = express();
 
@@ -31,7 +32,7 @@ app.use(cors());
 // );
 // app.use(
 //   cors({
-//     origin: "http://localhost:5000/",
+//     origin: "http://localhost:3000",
 //     methods: "GET,POST,PUT,DELETE",
 //     credentials: true,
 //   })
@@ -59,7 +60,18 @@ app.get('/' , (req,res) =>{
     res.send("server is working....");
 })
 
+app.post("/addallproducttodatabase" , async (req, res)=>{
+    try{
+        console.log(req.body.data);
+        await productmodel.insertMany(req.body.data);
+        res.status(201).send({message:"success"});
 
+
+    }catch(err){
+        console.log(err);
+        res.status(500).send({message:"error"})
+    }
+})
 
 
 

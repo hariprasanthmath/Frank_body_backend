@@ -23,6 +23,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Skeleton from '@mui/material/Skeleton';
+import { getproductscategory } from '../../constant';
 function ProductCategory() {
 
   let {type} = useParams();
@@ -50,7 +51,7 @@ function ProductCategory() {
 
 
   async function fetchData(){
-    let res = await axios.get(`https://frank-body-backend.vercel.app/products/category/${currCategory}?sort=${sort}`);
+    let res = await axios.get(`${getproductscategory}${currCategory}?sort=${sort}`);
     setData(res.data);
     setTimeout(()=>{
       setLoading(false);

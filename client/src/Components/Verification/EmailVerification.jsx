@@ -15,6 +15,7 @@ import {
 import { useState ,CSSProperties} from 'react';
 import "./Button.css";
 import  PropagateLoader from 'react-spinners/PropagateLoader'
+import { sendresetPassword } from '../../constant';
 
 
 
@@ -41,7 +42,7 @@ import  PropagateLoader from 'react-spinners/PropagateLoader'
         e.preventDefault();
         setLoading(true);
       
-      await fetch('https://frank-body-backend.vercel.app/user/sendResetPassword' ,{
+      await fetch(sendresetPassword ,{
 
                 method: "POST",
                 headers :{

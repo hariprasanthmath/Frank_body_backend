@@ -13,6 +13,7 @@ import {
 import { useRef } from 'react';
 import { useState } from 'react';
 import {useNavigate, useParams } from 'react-router-dom'
+import { userResetPassword } from '../../constant';
 
 
 export const  PasswordVerification=()=> {
@@ -41,7 +42,7 @@ const inputRef2 = useRef(null);
     const handleClick=async(e)=>{
       e.preventDefault();
       setLoading(true);
-     await fetch(`https://frank-body-backend.vercel.app/user/userResetPassword/${id}/${token}` ,{
+     await fetch(`${userResetPassword}${id}/${token}` ,{
 
                method: "POST",
                headers :{

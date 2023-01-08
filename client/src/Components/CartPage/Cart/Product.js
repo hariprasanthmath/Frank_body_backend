@@ -6,6 +6,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { deletefromcart } from '../../../constant';
 function Product({elem , func}) {
     
     const cookies = new Cookies();
@@ -27,7 +28,7 @@ function Product({elem , func}) {
     function handleClick(){
         let token = cookies.get('jwt');
             
-        axios.post('https://frank-body-backend.vercel.app/products/deletefromcart' , {
+        axios.post(`${deletefromcart}` , {
             headers: {
                 Authentication:token
             },

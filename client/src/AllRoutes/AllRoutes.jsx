@@ -26,6 +26,7 @@ import { EmailVerification } from '../Components/Verification/EmailVerification'
 import { PasswordVerification } from '../Components/Verification/PasswordVerification';
 import { addToCart } from '../ReduxStore/Actions/mainAction';
 import SearchedProducts from '../Components/Searched-Products/Searched-products';
+import { authloginsuccess, getcartmainpage, usergoogleregister } from '../constant';
 
 function AllRoutes() {
 
@@ -44,7 +45,7 @@ function AllRoutes() {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("http://localhost:5000/auth/login/success", {
+      fetch(authloginsuccess, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -78,7 +79,7 @@ function AllRoutes() {
     let token = cookies.get('jwt');
     if (token) {
 
-      axios.post('https://frank-body-backend.vercel.app/products/getcart', {
+      axios.post(getcartmainpage, {
         headers: {
           Authentication: token
         }
@@ -102,7 +103,7 @@ function AllRoutes() {
 
   async function addTobackend(data) {
 
-    axios.post('https://frank-body-backend.vercel.app/user/googleregister', {
+    axios.post(usergoogleregister, {
       name: data.displayName,
       email: data.emails[0].value,
       avtar: data.photos[0].value

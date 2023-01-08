@@ -10,6 +10,7 @@ import axios from 'axios';
 // import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getallproduct } from '../../../constant';
 function SimilarProducts({func}) {
 
     // const recommendaded = []
@@ -17,7 +18,7 @@ function SimilarProducts({func}) {
     const navigate = useNavigate();
 
     async function getRecommendedData(){
-        let temp = await axios.get('https://frank-body-backend.vercel.app/products');
+        let temp = await axios.get(getallproduct);
         // console.log(temp.data.data);
         // let check = temp.data.data.splice(3,7);
         setRecom([...temp.data.data]);

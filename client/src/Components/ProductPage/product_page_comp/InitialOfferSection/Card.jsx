@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { deletefromcart, productaddtocart } from '../../../../constant';
 function Card({data}) {
     const cookies = new Cookies();
     let {url_1 , prod_name , best_price  , _id , cartStatus} = data;
@@ -41,7 +42,7 @@ function Card({data}) {
             currCartState(true);
             let token = cookies.get('jwt');
             
-            axios.post('https://frank-body-backend.vercel.app/products/addtocart' , {
+            axios.post(productaddtocart , {
                 headers: {
                     Authentication:token
                 },
@@ -88,7 +89,7 @@ function Card({data}) {
 
             let token = cookies.get('jwt');
             
-            axios.post('https://frank-body-backend.vercel.app/products/deletefromcart' , {
+            axios.post(deletefromcart , {
                 headers: {
                     Authentication:token
                 },

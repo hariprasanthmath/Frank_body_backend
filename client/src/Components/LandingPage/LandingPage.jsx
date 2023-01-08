@@ -18,6 +18,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../ReduxStore/Actions/mainAction";
+import { getcartmainpage } from "../../constant";
 
 
 function LandingPage() {
@@ -28,7 +29,7 @@ function LandingPage() {
         let token = cookies.get('jwt');
         if(token){
 
-          axios.post('https://frank-body-backend.vercel.app/products/getcart' , {
+          axios.post(getcartmainpage , {
                 headers: {
                     Authentication:token
                 }

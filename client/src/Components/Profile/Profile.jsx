@@ -66,6 +66,8 @@ function Profile(props) {
      },[])
 
     const dispatch = useDispatch();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [currentUser, setCurrentuser] = useState({
         firstname : "",
         lastname : "",
@@ -85,45 +87,42 @@ const getData = async ()=>{
     console.log(url);
     let fetcheddata = await fetch(url);
     let result = await fetcheddata.json();
-    let namestring = result.message[0].name;
-    let containsspace = false;
-    for(var index=0; index<namestring.length;index++){
-          if(namestring.charCodeAt(index) === 32){
-              containsspace = true;
-          }
-    }
-    if(containsspace){
-      let fullname = result.message[0].name.split(" ");
+    console.log(result.message);
+    setName(result.message[0].name);
+    setEmail(result.message[0].email);
+    // let namestring = result.message[0].name;
+    // let containsspace = false;
+    // for(var index=0; index<namestring.length;index++){
+    //       if(namestring.charCodeAt(index) === 32){
+    //           containsspace = true;
+    //       }
+    // }
+    // if(containsspace){
+    //   let fullname = result.message[0].name.split(" ");
 
 
-      if(address){
-        if(result.message[0]?.address.length !== 0){
-          var address = result.message[0]?.address[0];
-      if(address?.firstname.length === 0 || address?.lastname.length === 0){
-          address.firstname = fullname[0];
-          address.lastname = fullname[1];
-          setCurrentuser(address);
-      }}else{
-        setCurrentuser({
-            ...currentUser,
-            firstname: fullname[0] ,
-            lastname: fullname[1] ,
-            email: result.message[0].email
-        })
-    }
-    }else{
-      address.firstname = namestring;
-      address.lastname = "";
-    }
+    //   if(address){
+    //     if(result.message[0]?.address.length !== 0){
+    //       var address = result.message[0]?.address[0];
+    //   if(address?.firstname.length === 0 || address?.lastname.length === 0){
+    //       address.firstname = fullname[0];
+    //       address.lastname = fullname[1];
+    //       setCurrentuser(address);
+    //   }}else{
+    //     setCurrentuser({
+    //         ...currentUser,
+    //         firstname: fullname[0] ,
+    //         lastname: fullname[1] ,
+    //         email: result.message[0].email
+    //     })
+    // }
+    // }else{
+    //   address.firstname = namestring;
+    //   address.lastname = "";
+    // }
     
 
-    }
-   
-
-    
-    
-    
-    
+    // } 
     console.log(result);
 }
     const [editUser, seteditUser] = useState(currentUser); 
@@ -212,10 +211,11 @@ const getData = async ()=>{
  
     const postData = async ()=>{
          let obj = {
-          email : currentUser.email,
+          email : email,
           mobile : mobile, 
           gender : gender
       }
+      console.log(obj);
          const url = `${postmobilegenderemail}`;
          let resp = await fetch(url, {
             method : "POST",
@@ -225,7 +225,7 @@ const getData = async ()=>{
             body : JSON.stringify(obj)
          })
         //  let result = await resp.json();
-        //  console.log(result);
+         
     }
   const printalldata = ()=>{
     console.log(curruserID, currentUser, mobile, gender);
@@ -254,8 +254,8 @@ const getData = async ()=>{
                       <HStack height={"100%"} minWidth={"max-content"} padding="30px" >
                              <img src="https://www.netmeds.com/msassets/images/icons/profile-icon.svg"></img>
                               <VStack margin={"30px"}>
-                              <Heading size={"md"}>{`${currentUser.firstname} ${currentUser.lastname}` }</Heading>
-                              <Text fontSize={"sm"}>{currentUser.email}</Text>
+                              <Heading size={"md"}>{`${name}` }</Heading>
+                              <Text fontSize={"sm"}>{email}</Text>
                               <EditIcon boxSize={4} _hover={{width:"110%", transition: 'width ease 0.5s',boxSize:"6" , cursor:"pointer"}} onClick={onOpen }/>
  
 
@@ -306,13 +306,13 @@ const getData = async ()=>{
                         </VStack>
                        </GridItem>
                        {/* fourth */}
-                      <GridItem style={border} rowSpan={3} colSpan={4} bg='white' > 
+                      <GridItem style={border} rowSpan={4} colSpan={4} bg='white' > 
                         <HStack display={"flex"} justifyContent={"space-between"} padding="30px">
                             <VStack width={"40%"}>
                             <FormControl>
                                 <FormLabel fontWeight={"bold"}>Login Information</FormLabel>
                                 <FormLabel fontWeight={"700"} color={"lightblue"}>Email</FormLabel>
-                                <Text width={"100%"} borderBottom={"2px solid lightgrey"} marginTop={"-2"}>{currentUser.email}</Text>
+                                <Text width={"100%"} borderBottom={"2px solid lightgrey"} marginTop={"-2"}>{email}</Text>
                                 <FormHelperText>We'll never share your email.</FormHelperText>
                                 <FormLabel marginTop={"6"} fontWeight={"700"} color={"lightblue"}>Mobile Number</FormLabel>
                                 <Text width={"100%"} borderBottom={"2px solid lightgrey"} marginTop={"-2"}>{mobile}</Text>
@@ -324,7 +324,7 @@ const getData = async ()=>{
                             <FormControl>
                                 <FormLabel fontWeight={"bold"}>PERSONAL INFORMATION</FormLabel>
                                 <FormLabel fontWeight={"700"} color={"lightblue"}>FULL NAME</FormLabel>
-                                <Text width={"100%"} borderBottom={"2px solid lightgrey"} marginTop={"-2"}>{`${currentUser.firstname} ${currentUser.lastname}` }</Text>
+                                <Text width={"100%"} borderBottom={"2px solid lightgrey"} marginTop={"-2"}>{name }</Text>
 
                                 <FormLabel marginTop={"6"} fontWeight={"700"} color={"lightblue"}>Gender</FormLabel>
                                 <Text width={"100%"} borderBottom={"2px solid lightgrey"} marginTop={"-2"}>{gender == 0? "NO DATA" : gender}</Text>

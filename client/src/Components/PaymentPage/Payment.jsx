@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { usersetaddress } from '../../constant';
 function Payment() {
 
     const [address , setAddress] = useState({
@@ -37,7 +38,7 @@ function Payment() {
       e.preventDefault();
 
       let token = cookies.get('jwt');
-      axios.post('https://frank-body-backend.vercel.app/user/setAddress' , {
+      axios.post(usersetaddress , {
 
       token:token,
       address:address

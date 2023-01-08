@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useRef } from 'react';
+import { authfacebook, authgithub, authgoogle, userregister } from '../../constant';
 function Register() {
 
     const email = useRef();
@@ -23,7 +24,7 @@ function Register() {
 
         e.preventDefault();
 
-       axios.post('http://localhost:5000/user/register' , {
+       axios.post(userregister , {
             name:fname.current.value +" "+lname.current.value,
             email:email.current.value,
             password:pass.current.value
@@ -63,15 +64,15 @@ function Register() {
 
 // https://frank-body-backend.vercel.app/auth/github
     const google = () => {
-        window.open("http://localhost:5000/auth/google", "_self");
+        window.open(authgoogle, "_self");
       };
     
       const facebook = () => {
-        window.open("http://localhost:5000/auth/facebook", "_self");
+        window.open(authfacebook, "_self");
       };
 
       const github = () => {
-        window.open("http://localhost:5000/auth/github", "_self");
+        window.open(authgithub, "_self");
       };
 
     return (

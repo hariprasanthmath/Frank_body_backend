@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { getallproduct } from '../../constant';
 import style from './search.css'
 
 
@@ -11,7 +12,7 @@ function Search() {
     let navigate = useNavigate()
 
     const getData = async () => {
-        let res = await fetch(`https://frank-body-backend.vercel.app/products`)
+        let res = await fetch(getallproduct)
         let arr = await res.json();
         setdata(arr.data);
     }

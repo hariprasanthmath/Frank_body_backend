@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import { useRef } from 'react';
+import { commentget } from '../../constant';
 function PaperComponent(props) {
   
   return (
@@ -40,7 +41,7 @@ export default function DraggableDialog({func}) {
 
   const handleClose = () => {
 
-    axios.post(`https://frank-body-backend.vercel.app/comment/${id}` , {
+    axios.post(`${commentget}${id}` , {
       token:{token},
       comment:{
         message:detail.current.value

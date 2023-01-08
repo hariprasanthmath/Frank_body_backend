@@ -8,6 +8,7 @@ import ShoppingOfferSection from '../ProductPage/product_page_comp/InitialOfferS
 import DetailsTabSection from './ProdDesComponent/DetailsTabSection';
 import SimilarProducts from './ProdDesComponent/SimilarProducts';
 import ProductsRating from '../ProductsRating/ProductsRating';
+import { getallproduct } from '../../constant';
 function ProductDescription() {
 
     const [currProd , setProd] = useState([]);
@@ -50,7 +51,7 @@ function ProductDescription() {
 
     
     async function getProductDetails(){
-        let res = await fetch(`https://frank-body-backend.vercel.app/products/${id2}`);
+        let res = await fetch(`${getallproduct}${id2}`);
         let data = await res.json()
 
         setProd([data]);
