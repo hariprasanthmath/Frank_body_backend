@@ -24,7 +24,7 @@ function RightCommentDiv({comments}) {
                     }
                 {
                     comments.length > 0 && comments.map((elem)=>{
-                        return elem != null && elem?.message.length > 5 && <SingleReview {...elem} />
+                        return elem != null && elem.message.length > 5 && <SingleReview {...elem} />
                     })
                 }
                 
